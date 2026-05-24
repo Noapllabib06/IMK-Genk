@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNOTES - Dashboard (Lo-Fi)</title>
+    <style>
+        /* RESET & DASAR LO-FI */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #ffffff; color: #000000; overflow-x: hidden; }
+        
+        /* BORDER & SHAPE KASAR (Tanpa lengkungan) */
+        .lofi-border { border: 2px solid #000000; border-radius: 0; }
+        .lofi-border-thin { border: 1px solid #000000; }
+        .lofi-bg-muted { background-color: #f5f5f5; }
+        
+        /* LAYOUT UTAMA (3 Kolom: Sidebar, Main, AI Panel) */
+        .app-container { display: grid; grid-template-columns: 240px 1fr 320px; min-height: 100vh; }
+        
+        /* 1. SIDEBAR (GLOBAL) */
+        .sidebar { border-right: 2px solid #000; padding: 24px; display: flex; flex-direction: column; background: #fff; }
+        .logo { font-size: 20px; font-weight: bold; margin-bottom: 40px; display: flex; align-items: center; gap: 8px; }
+        .logo-box { width: 24px; height: 24px; border: 2px solid #000; display: inline-block; }
+        .nav-menu { display: flex; flex-direction: column; gap: 12px; }
+        .nav-item { padding: 12px; border: 1px solid transparent; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .nav-item.active { border: 2px solid #000; font-weight: bold; background: #f5f5f5; }
+        .nav-icon { width: 16px; height: 16px; border: 1px solid #000; display: inline-block; }
+        
+        /* 2. AREA TENGAH (HEADER + KONTEN) */
+        .main-area { padding: 32px; background: #ffffff; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 24px; border-bottom: 2px solid #000; margin-bottom: 32px; }
+        .page-title { font-size: 28px; font-weight: bold; }
+        .header-actions { display: flex; gap: 12px; }
+        .btn-lofi { padding: 10px 16px; border: 2px solid #000; background: #fff; font-weight: bold; cursor: pointer; }
+        
+        /* KONTEN DASBOR */
+        .progress-widget { display: flex; align-items: center; gap: 24px; padding: 24px; margin-bottom: 32px; }
+        .progress-circle { width: 80px; height: 80px; border: 4px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; }
+        .progress-text h3 { font-size: 14px; text-transform: uppercase; margin-bottom: 8px; }
+        .progress-text p { font-size: 24px; font-weight: bold; }
+        
+        .task-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .task-card { padding: 20px; position: relative; }
+        .task-card.urgent { border-left-width: 8px; }
+        .task-card.normal { border-left-width: 2px; }
+        .task-title { font-size: 16px; font-weight: bold; margin-bottom: 8px; width: 80%; }
+        .task-subtitle { font-size: 14px; margin-bottom: 16px; }
+        .task-badge { display: inline-block; padding: 4px 8px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .task-actions { position: absolute; top: 20px; right: 20px; display: flex; gap: 8px; }
+        .action-btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; cursor: pointer; }
+
+        /* 3. AI PANEL (GLOBAL) */
+        .ai-panel { border-left: 2px solid #000; background: #fff; display: flex; flex-direction: column; }
+        .ai-header { padding: 24px; border-bottom: 2px solid #000; display: flex; justify-content: space-between; font-weight: bold; }
+        .ai-content { padding: 24px; }
+        .suggestion-box { padding: 16px; border-left-width: 6px; margin-bottom: 24px; }
+        .suggestion-title { font-size: 14px; font-weight: bold; margin-bottom: 8px; }
+        .suggestion-text { font-size: 14px; line-height: 1.5; }
+        .btn-full { width: 100%; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-box"></span> EduNOTES
+        </div>
+        <nav class="nav-menu">
+            <div class="nav-item active"><span class="nav-icon"></span> Dasbor Saya</div>
+            <div class="nav-item"><span class="nav-icon"></span> Kalender</div>
+            <div class="nav-item"><span class="nav-icon"></span> Riwayat</div>
+        </nav>
+        <div style="margin-top: auto; padding-top: 16px; border-top: 2px solid #000;">
+            <div class="nav-item"><span class="nav-icon"></span> Account</div>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <header class="header">
+            <h1 class="page-title">Dasbor Saya</h1>
+            <div class="header-actions">
+                <button class="btn-lofi">[AI] AI Panel</button>
+                <button class="btn-lofi">[+] Tambah Tugas Cepat</button>
+            </div>
+        </header>
+
+        <div class="progress-widget lofi-border lofi-bg-muted">
+            <div class="progress-circle bg-white">25%</div>
+            <div class="progress-text">
+                <h3>Progres Mingguan</h3>
+                <p>1 dari 4 Tugas Selesai</p>
+            </div>
+        </div>
+
+        <div class="task-grid">
+            <div class="task-card lofi-border urgent">
+                <div class="task-title">Laporan IMK Tahap 4</div>
+                <div class="task-subtitle">Interaksi Manusia & Komputer</div>
+                <div class="task-badge lofi-border-thin">[!] HARI INI, 16:00</div>
+                <div class="task-actions">
+                    <div class="action-btn lofi-border-thin">[v]</div>
+                    <div class="action-btn lofi-border-thin">[x]</div>
+                </div>
+            </div>
+
+            <div class="task-card lofi-border normal">
+                <div class="task-title">Revisi SRS EduNotes</div>
+                <div class="task-subtitle">Rekayasa Perangkat Lunak</div>
+                <div class="task-badge lofi-border-thin">BESOK, 23:59</div>
+                <div class="task-actions">
+                    <div class="action-btn lofi-border-thin">[v]</div>
+                    <div class="action-btn lofi-border-thin">[x]</div>
+                </div>
+            </div>
+            
+            <div class="task-card lofi-border normal">
+                <div class="task-title">Tugas Spring Boot Maven</div>
+                <div class="task-subtitle">Pemrograman Web</div>
+                <div class="task-badge lofi-border-thin">08 MEI</div>
+                <div class="task-actions">
+                    <div class="action-btn lofi-border-thin">[v]</div>
+                    <div class="action-btn lofi-border-thin">[x]</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside class="ai-panel">
+        <div class="ai-header">
+            <span>[AI] Asisten AI</span>
+            <span>[X]</span>
+        </div>
+        <div class="ai-content">
+            <div class="suggestion-box lofi-border">
+                <div class="suggestion-title">[!] Tindakan Disarankan</div>
+                <div class="suggestion-text">Prioritaskan pengerjaan Laporan IMK dan periksa kembali revisi dokumen SRS dari Pak Dimas sebelum diskusi lanjutan bersama Arkaan & Wahyu.</div>
+            </div>
+            <button class="btn-lofi btn-full">[+] Generate Jadwal Optimal</button>
+        </div>
+    </aside>
+
+</div>
+
+</body>
+</html>
