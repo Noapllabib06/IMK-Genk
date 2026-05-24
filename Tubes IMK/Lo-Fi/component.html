@@ -10,14 +10,31 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif !important; border-radius: 0 !important; box-shadow: none !important; color: #000 !important; }
         body { background-color: #E5E5E5 !important; padding: 40px; }
         
-        /* STICKER SHEET LAYOUT */
-        .sticker-sheet { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
-        .component-wrapper { display: flex; flex-direction: column; gap: 12px; }
+        /* STICKER SHEET MASONRY LAYOUT */
+        .sticker-sheet { 
+            column-count: 3; /* Membagi menjadi 3 kolom */
+            column-gap: 40px; 
+            width: 100%;
+        }
+        
+        /* Responsif untuk layar lebih kecil */
+        @media (max-width: 1400px) { .sticker-sheet { column-count: 2; } }
+        @media (max-width: 900px) { .sticker-sheet { column-count: 1; } }
+
+        .component-wrapper { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            width: 100%; 
+            break-inside: avoid; /* Mencegah komponen terpotong di antara 2 kolom */
+            margin-bottom: 40px; 
+        }
+
         .component-title { font-size: 14px; font-weight: 700; text-transform: uppercase; background: #000 !important; color: #fff !important; padding: 4px 8px; display: inline-block; width: max-content; }
         .lofi-box { background: #fff !important; border: 4px solid #000 !important; }
         
         /* MODAL WINDOW BASE */
-        .modal-window { padding: 32px; width: 480px; position: relative; }
+        .modal-window { padding: 32px; width: 100%; position: relative; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 2px solid #000 !important; padding-bottom: 12px; }
         .modal-label { font-size: 11px; text-transform: uppercase; margin-bottom: 6px; display: block; font-weight: bold; }
         
@@ -29,7 +46,7 @@
         .btn-solid { flex: 2; background: #000 !important; color: #fff !important; border: 2px solid #000 !important; padding: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
         /* DATEPICKER POPOVER (LO-FI) */
-        .datepicker-popover { position: absolute; top: 290px; left: 32px; width: 360px; display: flex; z-index: 10; background: #fff !important; border: 4px solid #000 !important; }
+        .datepicker-popover { position: absolute; top: 290px; left: 32px; width: calc(100% - 64px); max-width: 360px; display: flex; z-index: 10; background: #fff !important; border: 4px solid #000 !important; }
         .dp-calendar { flex: 2; padding: 16px; border-right: 2px solid #000 !important; }
         .dp-time { flex: 1; padding: 16px; display: flex; flex-direction: column; align-items: center; }
         .dp-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 13px; margin-bottom: 16px; }
@@ -44,7 +61,7 @@
         .time-box.active { border: 2px solid #000 !important; font-weight: bold; }
 
         /* AI PANEL */
-        .ai-panel { width: 320px; min-height: 480px; display: flex; flex-direction: column; }
+        .ai-panel { width: 100%; min-height: 480px; display: flex; flex-direction: column; }
         .ai-header { padding: 24px; border-bottom: 4px solid #000 !important; display: flex; justify-content: space-between; font-weight: bold; }
         .ai-content { padding: 24px; }
         .suggestion-box { border: 2px solid #000 !important; border-left-width: 8px !important; padding: 16px; margin-bottom: 24px; }
@@ -53,10 +70,10 @@
         ul.rundown-list li { margin-bottom: 8px; }
 
         /* TOAST NOTIFICATION */
-        .toast-notif { display: flex; align-items: center; gap: 12px; padding: 16px 24px; font-weight: bold; font-size: 14px; width: max-content; text-transform: uppercase; position: static; transform: none; }
+        .toast-notif { display: flex; align-items: center; gap: 12px; padding: 16px 24px; font-weight: bold; font-size: 14px; width: 100%; text-transform: uppercase; }
         
         /* AGENDA SUB-PANEL */
-        .agenda-panel { width: 400px; padding: 24px; }
+        .agenda-panel { width: 100%; padding: 24px; }
         .task-card { border: 2px solid #000 !important; padding: 16px; margin-top: 16px; border-left-width: 8px !important; }
         .badge { display: inline-block; padding: 4px 8px; border: 2px solid #000 !important; font-size: 11px; margin-top: 12px; font-weight: bold; text-transform: uppercase;}
     </style>
@@ -99,7 +116,8 @@
                     <h2 style="font-size: 18px;">[+] Tambah Tugas Baru</h2>
                     <span style="border: 2px solid #000 !important; padding: 2px 8px; font-weight: bold; cursor: pointer;">X</span>
                 </div>
-                <div style="padding-bottom: 220px;"> <label class="modal-label">Judul Tugas</label>
+                <div style="padding-bottom: 220px;"> 
+                    <label class="modal-label">Judul Tugas</label>
                     <div class="modal-input">Contoh: Laporan IMK</div>
                     <label class="modal-label">Mata Kuliah</label>
                     <div class="modal-input">Contoh: Desain Pengalaman Pengguna</div>
@@ -162,14 +180,27 @@
         </div>
 
         <div class="component-wrapper">
-            <div class="component-title">3. Modal Konfirmasi Peringatan</div>
-            <div class="modal-window lofi-box" style="text-align: center; width: 400px;">
+            <div class="component-title">3A. Modal Peringatan (Hapus Semua Tugas)</div>
+            <div class="modal-window lofi-box" style="text-align: center;">
                 <div style="font-size: 48px; font-weight: 900; margin-bottom: 16px; border: 4px solid #000 !important; width: 80px; height: 80px; margin-inline: auto; display: flex; align-items: center; justify-content: center;">!</div>
-                <h2 style="font-size:20px; font-weight:700; margin-bottom:8px; text-transform: uppercase;">Peringatan</h2>
-                <p style="font-size:14px; margin-bottom:24px; font-weight: bold;">Apakah Anda yakin ingin menghapus seluruh tugas?</p>
+                <h2 style="font-size:20px; font-weight:700; margin-bottom:8px; text-transform: uppercase;">Hapus Semua Tugas</h2>
+                <p style="font-size:14px; margin-bottom:24px; font-weight: bold; line-height: 1.5;">Apakah Anda yakin ingin menghapus seluruh tugas? Tugas akan dipindahkan ke Riwayat dengan status 'Dihapus'.</p>
                 <div class="modal-actions">
                     <button class="btn-outline">Batal</button>
                     <button class="btn-solid">Konfirmasi</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="component-wrapper">
+            <div class="component-title">3B. Modal Peringatan (Hapus Akun Permanen)</div>
+            <div class="modal-window lofi-box" style="text-align: center;">
+                <div style="font-size: 48px; font-weight: 900; margin-bottom: 16px; border: 4px solid #000 !important; width: 80px; height: 80px; margin-inline: auto; display: flex; align-items: center; justify-content: center;">!</div>
+                <h2 style="font-size:20px; font-weight:700; margin-bottom:8px; text-transform: uppercase;">Hapus Akun Permanen</h2>
+                <p style="font-size:14px; margin-bottom:24px; font-weight: bold; line-height: 1.5;">Semua data profil, tugas, dan histori Anda akan hilang selamanya. Apakah Anda yakin ingin melanjutkan?</p>
+                <div class="modal-actions">
+                    <button class="btn-outline">Batal</button>
+                    <button class="btn-solid">Hapus Akun</button>
                 </div>
             </div>
         </div>
@@ -204,48 +235,59 @@
                 </div>
             </div>
         </div>
-
-        <div style="display: flex; flex-direction: column; gap: 40px; width: 100%;">
-            
-            <div class="component-wrapper">
-                <div class="component-title">5A. Toast (Success State)</div>
-                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <div class="toast-notif lofi-box">
-                        <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Tugas Baru Berhasil Disimpan!</span>
-                    </div>
-                    <div class="toast-notif lofi-box">
-                        <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Profil Diperbarui!</span>
-                    </div>
-                    <div class="toast-notif lofi-box">
-                        <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Jadwal optimal berhasil dibuat!</span>
-                    </div>
+        
+        <div class="component-wrapper">
+            <div class="component-title">5A. Toast (Success State)</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="toast-notif lofi-box">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Tugas Baru Berhasil Disimpan!</span>
+                </div>
+                <div class="toast-notif lofi-box">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Tugas Selesai!</span>
+                </div>
+                <div class="toast-notif lofi-box">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Profil Diperbarui!</span>
+                </div>
+                <div class="toast-notif lofi-box">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Pengaturan Disimpan!</span>
+                </div>
+                <div class="toast-notif lofi-box">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Password Berhasil Diperbarui!</span>
+                </div>
+                <div class="toast-notif lofi-box">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Jadwal optimal berhasil dibuat!</span>
+                </div>
+                <div class="toast-notif lofi-box">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">V</span><span>Memproses Penghapusan Akun...</span>
                 </div>
             </div>
+        </div>
 
-            <div class="component-wrapper">
-                <div class="component-title">5B. Toast (Warning State)</div>
-                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <div class="toast-notif lofi-box" style="border-style: dashed !important;">
-                        <span style="border: 2px solid #000 !important; padding: 2px 6px;">!</span><span>Semua kolom harus diisi!</span>
-                    </div>
-                    <div class="toast-notif lofi-box" style="border-style: dashed !important;">
-                        <span style="border: 2px solid #000 !important; padding: 2px 6px;">!</span><span>Tidak ada tugas untuk dijadwalkan!</span>
-                    </div>
+        <div class="component-wrapper">
+            <div class="component-title">5B. Toast (Warning State)</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="toast-notif lofi-box" style="border-style: dashed !important;">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">!</span><span>Semua kolom harus diisi!</span>
+                </div>
+                <div class="toast-notif lofi-box" style="border-style: dashed !important;">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">!</span><span>Tidak ada tugas untuk dijadwalkan!</span>
                 </div>
             </div>
+        </div>
 
-            <div class="component-wrapper">
-                <div class="component-title">5C. Toast (Danger / Error State)</div>
-                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <div class="toast-notif lofi-box" style="border-width: 6px !important;">
-                        <span style="border: 2px solid #000 !important; padding: 2px 6px;">X</span><span>Seluruh tugas dipindahkan ke Riwayat</span>
-                    </div>
-                    <div class="toast-notif lofi-box" style="border-width: 6px !important;">
-                        <span style="border: 2px solid #000 !important; padding: 2px 6px;">X</span><span>Konfirmasi password tidak cocok!</span>
-                    </div>
+        <div class="component-wrapper">
+            <div class="component-title">5C. Toast (Danger / Error State)</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="toast-notif lofi-box" style="border-width: 6px !important;">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">X</span><span>Tugas Berhasil Dihapus!</span>
+                </div>
+                <div class="toast-notif lofi-box" style="border-width: 6px !important;">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">X</span><span>Seluruh tugas dipindahkan ke Riwayat</span>
+                </div>
+                <div class="toast-notif lofi-box" style="border-width: 6px !important;">
+                    <span style="border: 2px solid #000 !important; padding: 2px 6px;">X</span><span>Konfirmasi password tidak cocok!</span>
                 </div>
             </div>
-            
         </div>
 
         <div class="component-wrapper">
