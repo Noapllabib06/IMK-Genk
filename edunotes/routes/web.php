@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,3 +36,11 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/dashboard', function () {
     return view('pages.user.dashboard');
 })->middleware('auth');
+
+// Rute API untuk Manajemen Tugas (Hanya untuk yang login)
+Route::middleware('auth')->group(function () {
+    Route::get('/api/tasks', [TaskController::class, 'index']);
+    Route::post('/api/tasks', [TaskController::class, 'store']);
+    Route::post('/api/tasks/{id}/status', [TaskController::class, 'updateStatus']);
+    Route::post('/api/tasks/destroy-all', [TaskController::class, 'destroyAll']);
+});
