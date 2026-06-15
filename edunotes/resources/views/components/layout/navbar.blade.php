@@ -2,26 +2,26 @@
   <div class="container-fluid px-4">
     <a class="navbar-brand fw-bold fs-4" href="#home">EduNOTES</a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-5 gap-2">
+      <ul class="navbar-nav ms-lg-5 gap-2 mt-3 mt-lg-0">
         <li class="nav-item">
-          <a class="nav-link btn border-0 fw-semibold px-3 text-white" href="#home">HOME</a>
+          <a class="nav-link btn border-0 fw-semibold px-3 text-white text-start" href="#home">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link btn border-0 fw-semibold px-3 text-white" href="#about">ABOUT</a>
+          <a class="nav-link btn border-0 fw-semibold px-3 text-white text-start" href="#about">ABOUT</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link btn border-0 fw-semibold px-3 text-white" href="#information">INFORMATION</a>
+          <a class="nav-link btn border-0 fw-semibold px-3 text-white text-start" href="#information">INFORMATION</a>
         </li>
       </ul>
 
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle btn border-0 fw-semibold px-4 text-white d-flex align-items-center" 
+          <a class="nav-link dropdown-toggle btn border-0 fw-semibold px-4 text-white d-flex align-items-center justify-content-between" 
              href="#" 
              id="navbarDropdownAccount" 
              role="button" 

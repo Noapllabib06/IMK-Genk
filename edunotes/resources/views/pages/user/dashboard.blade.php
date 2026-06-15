@@ -1,29 +1,30 @@
 <x-layout.user>
     <x-slot:title>EduNOTES - Dashboard & Task Manager</x-slot:title>
 
-    <header class="header">
-        <h1 class="page-title" id="mainTitle">Dasbor Saya</h1>
-        <div style="display: flex; gap: 3px; align-items: center;">
-
-            <div id="search-wrapper" style="display:flex; align-items:center; background:#2a2a2a; border:1px solid #444; border-radius:30px; padding:0 16px; height:44px; gap:8px; transition:0.3s cubic-bezier(0.4, 0, 0.2, 1); width:200px; overflow:hidden;"
-                onfocusin="this.style.width='280px'; this.style.borderColor='var(--edunotes-blue)';" 
-                onfocusout="this.style.width='200px'; this.style.borderColor='#444';">
+    <header class="header d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
+        <h1 class="page-title m-0" id="mainTitle">Dasbor Saya</h1>
+        
+        <div class="d-flex flex-wrap gap-2 align-items-center w-100 justify-content-start justify-content-md-end">
+            <div id="search-wrapper" class="d-flex align-items-center flex-grow-1 flex-md-grow-0" 
+                 style="background:#2a2a2a; border:1px solid #444; border-radius:30px; padding:0 16px; height:44px; gap:8px; transition:0.3s cubic-bezier(0.4, 0, 0.2, 1); min-width: 150px; max-width: 100%; overflow:hidden;"
+                 onfocusin="this.style.borderColor='var(--edunotes-blue)';" 
+                 onfocusout="this.style.borderColor='#444';">
                 <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted); flex-shrink:0;"></i>
                 <input id="search-input" type="text" placeholder="Cari tugas..." oninput="handleSearch(this.value)"
                     style="background:transparent; border:none; outline:none; color:#fff; font-family:'Inter',sans-serif; font-size:13px; width:100%; opacity:1; pointer-events:auto;">
             </div>
 
-            <button id="btn-lang" onclick="toggleLang()"
+            <button id="btn-lang" onclick="toggleLang()" class="flex-shrink-0"
                 style="background:#2a2a2a; border:1px solid #444; border-radius:30px; padding:0 16px; height:44px; color:#fff; font-weight:700; font-size:12px; cursor:pointer; display:flex; align-items:center; gap:6px; transition:0.2s; white-space:nowrap;">
                 <i class="fa-solid fa-globe" style="color:var(--normal-teal);"></i>
                 <span id="lang-label">ID</span>
             </button>
 
-            <button class="btn-quick-add" style="background: #2a2a2a; border: 1px solid #444;" onclick="toggleAIPanel()">
+            <button class="btn-quick-add flex-grow-1 flex-md-grow-0 justify-content-center" style="background: #2a2a2a; border: 1px solid #444;" onclick="toggleAIPanel()">
                 <i class="fa-solid fa-robot"></i> <span class="i18n" data-id="AI Panel" data-en="AI Panel">AI Panel</span>
             </button>
 
-            <button class="btn-quick-add" onclick="toggleModal()">
+            <button class="btn-quick-add flex-grow-1 flex-md-grow-0 justify-content-center" onclick="toggleModal()">
                 <i class="fa-solid fa-plus"></i> <span class="i18n" data-id="Tambah Tugas Cepat" data-en="Add Task">Tambah Tugas Cepat</span>
             </button>
         </div>
@@ -41,12 +42,12 @@
     </div>
 
     <div id="page-calendar" class="page">
-        <div style="background: var(--card-dark); padding: 24px; border-radius: 16px; border: 1px solid #333;">
+        <div class="p-3 p-md-4" style="background: var(--card-dark); border-radius: 16px; border: 1px solid #333;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <button onclick="gantibulan(-1)" style="background: rgba(255,255,255,0.05); border: 1px solid #444; color: #fff; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: 0.2s;" onmouseover="this.style.borderColor='var(--edunotes-blue)'" onmouseout="this.style.borderColor='#444'">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
-                <h2 id="cal-month-label" style="font-size: 18px; font-weight: 700; color: #fff;"></h2>
+                <h2 id="cal-month-label" style="font-size: 18px; font-weight: 700; color: #fff; text-align: center;"></h2>
                 <button onclick="gantibulan(1)" style="background: rgba(255,255,255,0.05); border: 1px solid #444; color: #fff; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: 0.2s;" onmouseover="this.style.borderColor='var(--edunotes-blue)'" onmouseout="this.style.borderColor='#444'">
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
@@ -83,7 +84,7 @@
     </div>
 
     <div id="page-account" class="page">
-        <div style="background:var(--card-dark); border:1px solid #333; border-radius:16px; padding:24px 32px; margin-bottom:24px; display:flex; align-items:center; gap:24px;">
+        <div class="d-flex flex-column flex-sm-row text-center text-sm-start align-items-center gap-3 p-3 p-md-4 mb-4" style="background:var(--card-dark); border:1px solid #333; border-radius:16px;">
             <div style="width:72px; height:72px; border-radius:50%; background:var(--normal-teal); display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:800; color:#000; flex-shrink:0;">
                 {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
             </div>
@@ -99,7 +100,7 @@
 
         <div class="account-grid">
             <div style="display: flex; flex-direction: column; gap: 24px;">
-                <div style="background:var(--card-dark); border:1px solid #333; border-radius:16px; padding:24px;">
+                <div class="p-3 p-md-4" style="background:var(--card-dark); border:1px solid #333; border-radius:16px;">
                     <h3 style="font-size:13px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">
                         <i class="fa-regular fa-user" style="margin-right:6px;"></i> <span class="i18n" data-id="Informasi Pribadi" data-en="Personal Information">Informasi Pribadi</span>
                     </h3>
@@ -120,44 +121,44 @@
                     </button>
                 </div>
 
-                <div class="danger-zone" style="background:var(--card-dark); border:1px solid #333; border-radius:16px; padding:24px;">
+                <div class="danger-zone p-3 p-md-4" style="background:var(--card-dark); border:1px solid #333; border-radius:16px;">
                     <h3 style="color:var(--urgent-red); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">
                         <i class="fa-solid fa-triangle-exclamation" style="margin-right:6px;"></i> DANGER ZONE
                     </h3>
-                    <div class="sec-row">
+                    <div class="sec-row d-flex flex-wrap gap-2 justify-content-between align-items-center">
                         <div>
                             <p style="font-size:14px; font-weight:600; color:#fff;" class="i18n" data-id="Hapus Semua Tugas" data-en="Delete All Tasks">Hapus Semua Tugas</p>
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;" class="i18n" data-id="Tindakan ini tidak bisa dibatalkan" data-en="This action cannot be undone">Tindakan ini tidak bisa dibatalkan</p>
                         </div>
-                        <button class="btn-danger-outline i18n" data-id="Hapus" data-en="Delete" onclick="hapusSemuaTugas()">Hapus</button>
+                        <button class="btn-danger-outline i18n w-100 w-sm-auto mt-2 mt-sm-0" data-id="Hapus" data-en="Delete" onclick="hapusSemuaTugas()">Hapus</button>
                     </div>
                 </div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 24px;">
-                <div style="background:var(--card-dark); border:1px solid #333; border-radius:16px; padding:24px;">
+                <div class="p-3 p-md-4" style="background:var(--card-dark); border:1px solid #333; border-radius:16px;">
                     <h3 style="font-size:13px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">
                         <i class="fa-solid fa-lock" style="margin-right:6px;"></i> <span class="i18n" data-id="Keamanan" data-en="Security">Keamanan</span>
                     </h3>
-                    <div class="sec-row">
+                    <div class="sec-row d-flex flex-wrap gap-2 justify-content-between align-items-center">
                         <div>
                             <p style="font-size:14px; font-weight:600; color:#fff;">Password</p>
                             <p style="font-size:12px; color:var(--text-muted); margin-top:2px;" class="i18n" data-id="Fitur Demo" data-en="Demo Feature">Fitur Demo UI</p>
                         </div>
-                        <button class="btn-outline-gray i18n" data-id="Ubah" data-en="Change" onclick="toggleModalPassword()">Ubah</button>
+                        <button class="btn-outline-gray i18n w-100 w-sm-auto mt-2 mt-sm-0" data-id="Ubah" data-en="Change" onclick="toggleModalPassword()">Ubah</button>
                     </div>
                 </div>
 
-                <div style="background:var(--card-dark); border:1px solid #333; border-radius:16px; padding:24px;">
+                <div class="p-3 p-md-4" style="background:var(--card-dark); border:1px solid #333; border-radius:16px;">
                     <h3 style="font-size:13px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">
                         <i class="fa-regular fa-bell" style="margin-right:6px;"></i> <span class="i18n" data-id="Notifikasi" data-en="Notifications">Notifikasi</span>
                     </h3>
-                    <div class="sec-row">
-                        <p style="font-size:14px; font-weight:600; color:#fff;" class="i18n" data-id="Pengingat deadline" data-en="Deadline reminders">Pengingat deadline</p>
+                    <div class="sec-row d-flex justify-content-between align-items-center mb-3">
+                        <p style="font-size:14px; font-weight:600; color:#fff; margin:0;" class="i18n" data-id="Pengingat deadline" data-en="Deadline reminders">Pengingat deadline</p>
                         <div onclick="toggleNotif(this)" class="toggle-switch on"><div class="knob"></div></div>
                     </div>
-                    <div class="sec-row">
-                        <p style="font-size:14px; font-weight:600; color:#fff;" class="i18n" data-id="Saran dari AI" data-en="AI Suggestions">Saran dari AI</p>
+                    <div class="sec-row d-flex justify-content-between align-items-center">
+                        <p style="font-size:14px; font-weight:600; color:#fff; margin:0;" class="i18n" data-id="Saran dari AI" data-en="AI Suggestions">Saran dari AI</p>
                         <div onclick="toggleNotif(this)" class="toggle-switch on"><div class="knob"></div></div>
                     </div>
                 </div>
@@ -165,7 +166,4 @@
         </div>
     </div>
 
-    
-
 </x-layout.user>
-

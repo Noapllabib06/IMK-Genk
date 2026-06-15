@@ -229,3 +229,59 @@ section { scroll-margin-top: 80px; padding: 100px 0; }
 /* Button Custom */
 .btn-primary-custom { background: var(--edunotes-blue); border: none; border-radius: 0.6rem; padding: 0.75rem; font-weight: 600; color: #fff; width: 100%; transition: 0.2s; }
 .btn-primary-custom:hover { background: #0b5ed7; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(13, 110, 253, 0.3); }
+
+/* =============================
+   MOBILE RESPONSIVENESS FIXES
+   ============================= */
+
+/* Khusus Layar HP (Lebar maksimal 768px) */
+@media (max-width: 768px) {
+    /* 1. Ubah struktur grid menjadi menyusun ke bawah */
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    /* 2. Sembunyikan Sidebar sementara di HP (Gunakan menu navigasi atas/hamburger menu yang tadi sudah dibuat) */
+    .sidebar {
+        display: none; 
+    }
+
+    /* 3. Perkecil ruang kosong (padding) di kanan-kiri layar */
+    .main-content {
+        padding: 16px 20px;
+    }
+
+    /* 4. Pastikan kartu tugas dan akun menumpuk 1 kolom penuh di HP */
+    .task-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 5. Sembunyikan AI panel atau buat menumpuk ke bawah (opsional) */
+    .ai-panel {
+        display: none; /* Disembunyikan dulu di layar utama HP agar tidak sesak */
+    }
+
+    /* 6. Perkecil ukuran huruf judul utama */
+    .page-title {
+        font-size: 24px;
+    }
+}
+
+/* Khusus Layar Tablet / Laptop Kecil (Lebar maksimal 1024px) */
+@media (max-width: 1024px) {
+    /* Hanya tampilkan Sidebar dan Konten utama, Panel AI disembunyikan / ditutup otomatis */
+    .app-container {
+        grid-template-columns: 240px 1fr 0px; 
+    }
+    
+    .task-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
