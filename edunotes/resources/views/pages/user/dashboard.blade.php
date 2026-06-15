@@ -166,4 +166,26 @@
         </div>
     </div>
 
+    <button class="fab-add-task d-md-none" onclick="toggleModal()">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <nav class="mobile-bottom-nav d-md-none">
+        <a href="#" onclick="switchPage('dashboard')" class="active" id="nav-mob-dashboard">
+            <i class="fa-solid fa-house"></i> Dasbor
+        </a>
+        <a href="#" onclick="switchPage('calendar')" id="nav-mob-calendar">
+            <i class="fa-solid fa-calendar"></i> Kalender
+        </a>
+        <a href="#" onclick="toggleAIPanel()">
+            <i class="fa-solid fa-robot"></i> AI Panel
+        </a>
+        <a href="#" onclick="switchPage('history')" id="nav-mob-history">
+            <i class="fa-solid fa-clock-rotate-left"></i> Riwayat
+        </a>
+        <a href="#" onclick="switchPage('account')" id="nav-mob-account">
+            <i class="fa-solid fa-user"></i> Akun
+        </a>
+    </nav>
+
 </x-layout.user>

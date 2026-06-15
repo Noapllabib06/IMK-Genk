@@ -233,55 +233,86 @@ section { scroll-margin-top: 80px; padding: 100px 0; }
 /* =============================
    MOBILE RESPONSIVENESS FIXES
    ============================= */
-
-/* Khusus Layar HP (Lebar maksimal 768px) */
 @media (max-width: 768px) {
-    /* 1. Ubah struktur grid menjadi menyusun ke bawah */
-    .app-container {
+    /* 1. Sembunyikan tombol header yang membuat sempit */
+    .header .btn-quick-add, .header #btn-lang {
+        display: none !important;
+    }
+
+    /* 2. Sesuaikan Search Bar agar lega */
+    .header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 16px;
+    }
+    #search-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* 3. Bottom Navigation */
+    .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: var(--card-dark);
+        border-top: 1px solid #333;
+        z-index: 1050;
+        justify-content: space-around;
+        padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .mobile-bottom-nav a {
+        color: var(--text-muted);
+        text-decoration: none;
         display: flex;
         flex-direction: column;
-        height: 100vh;
-        overflow-y: auto;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 600;
+        gap: 6px;
+        transition: color 0.2s;
     }
 
-    /* 2. Sembunyikan Sidebar sementara di HP (Gunakan menu navigasi atas/hamburger menu yang tadi sudah dibuat) */
-    .sidebar {
-        display: none; 
+    .mobile-bottom-nav a.active, .mobile-bottom-nav a:active {
+        color: var(--edunotes-blue);
     }
 
-    /* 3. Perkecil ruang kosong (padding) di kanan-kiri layar */
-    .main-content {
-        padding: 16px 20px;
+    .mobile-bottom-nav a i {
+        font-size: 20px;
     }
 
-    /* 4. Pastikan kartu tugas dan akun menumpuk 1 kolom penuh di HP */
-    .task-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .account-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* 5. Sembunyikan AI panel atau buat menumpuk ke bawah (opsional) */
-    .ai-panel {
-        display: none; /* Disembunyikan dulu di layar utama HP agar tidak sesak */
-    }
-
-    /* 6. Perkecil ukuran huruf judul utama */
-    .page-title {
+    /* 4. Tombol Tambah Tugas Melayang (FAB) */
+    .fab-add-task {
+        display: flex !important;
+        position: fixed;
+        bottom: 80px; /* Jarak agar tidak tertutup bottom nav */
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--edunotes-blue);
+        color: white;
+        align-items: center;
+        justify-content: center;
         font-size: 24px;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
+        z-index: 1040;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* 5. Tambah ruang kosong di bawah konten utama agar tak terpotong nav */
+    .main-content {
+        padding-bottom: 100px !important;
     }
 }
 
-/* Khusus Layar Tablet / Laptop Kecil (Lebar maksimal 1024px) */
-@media (max-width: 1024px) {
-    /* Hanya tampilkan Sidebar dan Konten utama, Panel AI disembunyikan / ditutup otomatis */
-    .app-container {
-        grid-template-columns: 240px 1fr 0px; 
-    }
-    
-    .task-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+/* Sembunyikan navigasi bawah dan FAB di layar laptop/tablet besar */
+@media (min-width: 769px) {
+    .mobile-bottom-nav, .fab-add-task {
+        display: none !important;
     }
 }
